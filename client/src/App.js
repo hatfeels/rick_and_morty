@@ -1,7 +1,9 @@
+// imports librerias
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { Routes, Route, useLocation, useNavigate } from "react-router-dom";
 
+// imporst Modulos
 import styles from "./App.module.css";
 
 import Error404 from "./components/errors/E404.jsx";
@@ -12,13 +14,17 @@ import Detail from "./components/cards/card/Detail";
 import Form from "./components/form/Form";
 import Favorites from "./components/favorites/Favorites";
 
+
 const App = () => {
+  
+  // definiciones de variables y estados
   const [characters, setCharacters] = useState([]);
   const { pathname } = useLocation();
 
   const navigate = useNavigate();
   const [access, setAccess] = useState(false);
 
+  // FN de comportamiento
   const login = async (userData) => {
     const { email, password } = userData;
     const URL = "http://localhost:3001/rickandmorty/login/";
@@ -35,17 +41,13 @@ const App = () => {
     }
   };
 
-  useEffect(() => {
-    !access && navigate("/");
-  }, [access]);
-
   const onSearch = async (id) => {
     try {
       const { data } = await axios.get(
         `http://localhost:3001/rickandmorty/character/${id}`
-      );
-      setCharacters((oldChars) => [...oldChars, data]);
-    } catch (error) {
+        );
+        setCharacters((oldChars) => [...oldChars, data]);
+      } catch (error) {
       window.alert(error.message);
     }
   };
@@ -55,9 +57,14 @@ const App = () => {
       characters.filter((char) => {
         return char.id !== Number(id);
       })
-    );
-  };
-
+      );
+    };
+    
+    useEffect(() => {
+      !access && navigate("/");
+    }, [access]);
+    
+//render
   return (
     <div className={styles.App}>
       <Routes>

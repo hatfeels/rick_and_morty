@@ -1,3 +1,4 @@
+//requires y 
 const express = require("express");
 const morgan = require("morgan");
 
@@ -6,6 +7,7 @@ const router = require("./routes/index.js");
 const server = express();
 const PORT = 3001;
 
+//Middlewares
 server.use(express.json());
 server.use(morgan("dev"));
 
@@ -22,6 +24,7 @@ server.use((req, res, next) => {
 
 server.use("/rickandmorty", router);
 
+// server
 server.listen(PORT, () => {
   console.log("Server raised in port: " + PORT);
 });

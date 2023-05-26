@@ -1,5 +1,8 @@
 .contenedor{
-    border: 10 solid black;
+    box-sizing: border-box;
+    border: 10px  solid black;
+    width: fit-content;
+    height: fit-content;
     justify-content: center;
     padding: 5px;
     grid-column: 1/3;
